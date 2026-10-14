@@ -1,0 +1,12 @@
+# transfer-neg.model - [error] утгуудыг ~-ээр тэмдэглэв (нэг мөрөнд хамгийн ихдээ нэг ~)
+# To=Frozen нь [single] (алдаа биш) тул ~ тавиагүй.
+# LimitUsed=Full-д ~ тавиагүй: Full үед Amount заавал ~OverLimit тул хоёр ~ давхцана.
+
+From:      Valid, ~Frozen, ~Missing
+To:        Valid, ~Missing, ~SameAsFrom, Frozen
+Amount:    Normal, EqualBalance, EqualLimit, ~Zero, ~Negative, ~OverBalance, ~OverLimit
+Currency:  Same, DiffUp, DiffDown
+LimitUsed: None, Partial, Full
+
+# ~ нь алдаа хоорондын хослолыг хасдаг ч энэ физик хязгаарыг мэдэхгүй
+IF [LimitUsed] = "Full" THEN [Amount] = "OverLimit";
