@@ -1,0 +1,10 @@
+# transfer-nc.model - Хэсэг A-гийн сонголтууд, хязгаарлалтгүй
+# Amount   = A + B + L нэгтгэсэн (бие биенээ үгүйсгэх утгууд)
+# Currency = C + R (DiffUp: ханш > 1, DiffDown: ханш < 1)
+# LimitUsed = E (өнөөдөр ашигласан лимит)
+
+From:      Valid, Frozen, Missing
+To:        Valid, Missing, SameAsFrom, Frozen
+Amount:    Normal, EqualBalance, EqualLimit, Zero, Negative, OverBalance, OverLimit
+Currency:  Same, DiffUp, DiffDown
+LimitUsed: None, Partial, Full
