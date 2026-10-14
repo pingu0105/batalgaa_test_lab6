@@ -1,0 +1,16 @@
+# transfer.model - Хэсэг A-гийн сонголтууд + A2-ын хязгаарлалтууд
+
+From:      Valid, Frozen, Missing
+To:        Valid, Missing, SameAsFrom, Frozen
+Amount:    Normal, EqualBalance, EqualLimit, Zero, Negative, OverBalance, OverLimit
+Currency:  Same, DiffUp, DiffDown
+LimitUsed: None, Partial, Full
+
+# [error] From: Frozen/Missing бусад алдаатай хослохгүй
+IF [From] <> "Valid" THEN [To] IN {"Valid", "Frozen"} AND [Amount] IN {"Normal", "EqualBalance", "EqualLimit"} AND [LimitUsed] <> "Full";
+
+# [error] To: Missing/SameAsFrom бусад алдаатай хослохгүй
+IF [To] IN {"Missing", "SameAsFrom"} THEN [Amount] IN {"Normal", "EqualBalance", "EqualLimit"} AND [LimitUsed] <> "Full";
+
+# [error] E3: үлдсэн лимит 0 -> эерэг дүн бүр лимит хэтэрнэ
+IF [LimitUsed] = "Full" THEN [Amount] = "OverLimit";
